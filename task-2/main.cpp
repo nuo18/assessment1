@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 
 void main()
 {
@@ -16,5 +17,11 @@ void main()
     // - Username: [<clantag>]<username>
     // - Age: <age>
     //
-    
+
+    //defining variables
+    string name;
+
+    //Input Output
+    cout << "Enter your name: ";
+    cin >> name;
 }
