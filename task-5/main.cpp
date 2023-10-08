@@ -7,7 +7,7 @@ using namespace std;
 void sentenceCase(string input);
 void allLowercase(string input);
 void allUppercase(string input);
-void checkAlphabetical(string input);
+bool checkAlphabetical(string input);
 
 void main()
 {
@@ -42,11 +42,17 @@ void main()
     getline(cin, input); // getline() is used to take input with spaces
     cout << endl;
 
-    // Calling the function
-    sentenceCase(input);
-    allLowercase(input);
-    allUppercase(input);
-    checkAlphabetical(input);
+    // Calling the function and checking if the string has no alphabetical characters
+    if (!checkAlphabetical(input))
+	{
+        sentenceCase(input);
+        allLowercase(input);
+        allUppercase(input);
+    }
+    else {
+        // printing the warning
+        cout << "Warning: The string has no alphabetical characters." << endl;
+    }
 }
 
 void sentenceCase(string input)
@@ -105,27 +111,25 @@ void allUppercase(string input)
 	cout << " - Uppercase: " << input << endl;
 }
 
-void checkAlphabetical(string input)
+bool checkAlphabetical(string input)
 {
+    // how many non-alphabetical characters are there
     int check = 0;
 	// Looping through the string
     for (int i = 0; i < input.length(); i++)
     {
 		// Checking if the character is alphabetical
-        if (isalpha(input[i]))
+        if (!isalpha(input[i]))
         {
 			check++;
 		}
 	}
 
-    // Checking if the string has no alphabetical characters
-    if (check == 0)
+    // Checking if the number of non-alphabetical characters is equal to the length of the string
+    if (check == input.length())
     {
-		// Printing the warning
-		cout << " - Warning: The text has no alphabetical characters." << endl;
-	}
-    else
-    {
-        cout << " - The text does have alphabetical characters." << endl;
+		return true;
     }
+    // If not, return false
+    return false;
 }
