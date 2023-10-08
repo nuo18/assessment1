@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 
 void main()
 {
@@ -7,4 +8,12 @@ void main()
 
     // What number do you want to Square? 5
     // > 5 squared is 25.
+
+    float num;
+
+    // Take input
+    cout << "What number do you want to Square? ";
+    cin >> num;
+
+    cout << num << " squared is " << (num * num) << endl;
 }

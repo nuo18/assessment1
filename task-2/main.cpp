@@ -20,8 +20,27 @@ void main()
 
     //defining variables
     string name;
+    string clan;
+    string username;
+    int age;
 
     //Input Output
-    cout << "Enter your name: ";
+    cout << "Please enter your name: ";
     cin >> name;
+
+    cout << "Please enter your clan tag: ";
+    cin >> clan;
+
+    cout << "Please enter your username: ";
+    cin >> username;
+
+    cout << "Please enter your age: ";
+    cin >> age;
+
+    //Printing details
+    cout << "Player details: \n";
+    cout << " - Name: " << name << endl;
+    cout << " - Username: [" << clan << "] " << username << endl;
+    cout << " - Age: " << age << endl;
+
 }
