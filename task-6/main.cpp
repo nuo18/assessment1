@@ -34,6 +34,57 @@ void main()
     //At the end of the program, it should also display the number of guesses
     //the player needed to guess the value in.     
 
-    cout << "Here is a random number between 1 and 10: " << random(1, 10) << endl;
-    cout << "And here is one between -3 and -5: " << random(-3, -5) << endl;
+    int guess = 0;
+    int answer = random(0, 100);
+    cout << answer << endl;
+    int userGuesses = 0;
+
+    cout << "Welcome to the random number guessing game!" << endl;
+    cout << "Enter a guess: ";
+    cin >> guess;
+
+    userGuesses++;
+
+    while (guess != answer)
+    {
+        if (answer + 2 >= guess >= answer - 2)
+        {
+            cout << "Boiling!" << endl;
+        }
+        else if (answer + 5 >= guess >= answer - 5)
+        {
+            cout << "Hot!" << endl;
+        }
+        else if (answer + 10 >= guess >= answer - 10)
+        {
+            cout << "Warmer!" << endl;
+        }
+        else if (answer + 15 >= guess >= answer - 15)
+        {
+            cout << "Warm!" << endl;
+        }
+        else if (answer + 25 >= guess >= answer - 25)
+        {
+            cout << "Cold!" << endl;
+        }
+        else if (answer + 35 >= guess >= answer - 35)
+        {
+            cout << "Colder!" << endl;
+        }
+        else if (answer + 50 >= guess >= answer - 50)
+        {
+            cout << "Freezing!" << endl;
+        }
+        else
+        {
+            break;
+        }
+
+		cout << "Enter a guess: ";
+		cin >> guess;
+        userGuesses++;
+	}
+
+    cout << "You guessed the number in " << userGuesses << " guesses!" << endl;
+    cout << "Thanks for playing!" << endl;
 }
