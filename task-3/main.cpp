@@ -15,5 +15,6 @@ void main()
     cout << "What number do you want to Square? ";
     cin >> num;
 
+    // Output
     cout << num << " squared is " << (num * num) << endl;
 }
