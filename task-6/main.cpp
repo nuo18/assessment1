@@ -1,5 +1,4 @@
 #include "main.h"
-
 using namespace std;
 
 void main()
@@ -35,8 +34,8 @@ void main()
     //the player needed to guess the value in.     
 
     int guess = 0;
+    // Generating the random number
     int answer = random(0, 100);
-    cout << answer << endl;
     int userGuesses = 0;
 
     cout << "Welcome to the random number guessing game!" << endl;
@@ -47,32 +46,41 @@ void main()
 
     while (guess != answer)
     {
-        if (answer + 2 >= guess >= answer - 2)
+        if (guess > 99 || guess < 1)
+        {
+            cout << "Please enter a number between 0 - 100." << endl;
+        }
+        else if (answer + 2 >= guess && guess >= answer - 2)
         {
             cout << "Boiling!" << endl;
         }
-        else if (answer + 5 >= guess >= answer - 5)
+        else if (answer + 5 >= guess && guess >= answer - 5)
         {
             cout << "Hot!" << endl;
         }
-        else if (answer + 10 >= guess >= answer - 10)
+        else if (answer + 10 >= guess && guess >= answer - 10)
         {
             cout << "Warmer!" << endl;
         }
-        else if (answer + 15 >= guess >= answer - 15)
+        else if (answer + 15 >= guess && guess >= answer - 15)
         {
             cout << "Warm!" << endl;
         }
-        else if (answer + 25 >= guess >= answer - 25)
+        else if (answer + 25 >= guess && guess >= answer - 25)
         {
             cout << "Cold!" << endl;
         }
-        else if (answer + 35 >= guess >= answer - 35)
+        else if (answer + 35 >= guess && guess >= answer - 35)
         {
             cout << "Colder!" << endl;
         }
-        else if (answer + 50 >= guess >= answer - 50)
+        else if (answer + 50 >= guess && guess >= answer - 50)
         {
+            cout << "Freezing!" << endl;
+        }
+        else if (answer + 100 >= guess && guess >= answer - 100)
+        {
+            // For extreme cases where the random number is very low/high and the guess is very high/low
             cout << "Freezing!" << endl;
         }
         else
