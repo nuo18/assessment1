@@ -41,11 +41,14 @@ void main()
     // The main game loop
     while (command != "exit")
     {
-        	// Asking the user to enter a command
-		cout << "Please enter a command: ";
+        // Asking the user to enter a command
+		// cout << "Please enter a command: ";
+        // Waiting for user input
+        cout << "> ";
 		cin >> command;
 
 		// Checking the command
+        // view <number>
         if (command == "view")
         {
 			// Declaring the variables
@@ -64,21 +67,18 @@ void main()
             else
             {
 				// Printing an error message
-				cout << "Invalid index!\n" << endl;
+				cout << "Invalid index!" << endl;
+                cout << endl;
 			}
 		}
+        // set <index> <item_id>
         else if (command == "set")
         {
 			// Declaring the variables
 			int index = 0;
 			int itemId = 0;
 
-			// Asking the user to enter the index of the item
-			cout << "Please enter the index of the item: ";
 			cin >> index;
-
-			// Asking the user to enter the id of the item
-			cout << "Please enter the id of the item: ";
 			cin >> itemId;
 
 			// Checking if the index is within the range
@@ -93,20 +93,24 @@ void main()
 				cout << "Invalid index!" << endl;
 			}
 		}
+        // show_all
         else if (command == "show_all")
         {
 			// Calling the showInventory function
             cout << endl;
 			showInventory(inventory, inventorySize);
 		}
+        // items
         else if (command == "items")
         {
 			// Calling the possibleItems function
             cout << endl;
 			possibleItems();
 		}
+        // exit
         else if (command == "exit")
 		{ }
+        // Invalid command
         else
         {
 			// Printing an error message
