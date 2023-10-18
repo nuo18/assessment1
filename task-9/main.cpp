@@ -1,4 +1,6 @@
 #include <iostream>
+#include "main.h"
+using namespace std;
 
 void main()
 {
@@ -31,4 +33,10 @@ void main()
     //You should then build two Vector2s from the given x and y components, and show
     //the calculated distance between each point.
     
+    Vector2 v1 = { xComponents[0], yComponents[0] };
+    Vector2 v2 = { xComponents[1], yComponents[1] };
+
+    float distance = GetDistanceBetweenPoints(v1, v2);
+
+    cout << "The distance between (" << v1.x << ", " << v1.y << ") and (" << v2.x << ", " << v2.y << ") is " << distance << endl;
 }
