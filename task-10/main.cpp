@@ -11,7 +11,7 @@ struct Assessment1
     // Challenge information
     int challenges[10];
     int challenges_weighting[10] = { 5, 5, 5, 10, 10, 10, 10, 15, 15, 15 };
-    int challenges_overall_grade;
+    int challenges_overall_grade = 0;
     int challenges_overall_weighting = 70;
 
     // Documentation information
