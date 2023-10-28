@@ -1,87 +1,129 @@
 #include <iostream>
 using namespace std;
 
-struct Assessment1
+struct crg1
 {
-    // Course information
-    string name = "Assessment #1 Challenges";
-    int weighting = 50;
-    int overall_grade;
+    //user input
+    int c1_marks = 0;
+    int c2_marks = 0;
 
-    // Challenge information
-    int challenges[10];
-    int challenges_weighting[10] = { 5, 5, 5, 10, 10, 10, 10, 15, 15, 15 };
-    int challenges_overall_grade = 0;
-    int challenges_overall_weighting = 70;
+    //weighting
+    int c1_weight = 70;
+    int c2_weight = 30;
 
-    // Documentation information
-    int documentation;
-    int documentation_weighting = 30;
+    float percentage;
+
+    //Bands
+    string band1 = "C1 The completion of the given programming challenges, and development of a portfolio.";
+    string band2 = "C2 A reflective journal on the development of a programming portfolio.";
 };
 
-struct Assessment2
+struct crg2
 {
-    // Course information
-    string name = "Assessment #2 ASCII Game";
-    int weighting = 50;
-    int overall_grade;
+    //user input
+    int c1_marks = 0;
+    int c2_marks = 0;
+    int c3_marks = 0;
 
-    // Development information
-    int development;
-    int development_weighting = 60;
-    int code_quality;
-    int code_weighting = 20;
-    int programming;
-    int programming_weighting = 20;
+    //weighting
+    int c1_weight = 60;
+    int c2_weight = 20;
+    int c3_weight = 20;
+
+    float percentage;
+
+    //Bands
+    string band1 = "C1 Development of text-based game artefact";
+    string band2 = "C2 Code quality and best practices";
+    string band3 = "C3 Demonstration of broad range of programming techniques and applicability of learned techniques";
 };
 
 void main()
 {
-    Assessment1 assm1;
-    Assessment2 assm2;
+    //User input
+    crg1 assessment1;
+    crg2 assessment2;
+
+    //Assessment 1
+    cout << "Assessment 1" << endl;
+    cout << "Enter marks for criterion 1: ";
+    do {
+        cin >> assessment1.c1_marks;
+        if (cin.fail() || assessment1.c1_marks < 0 || assessment1.c1_marks > 100) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please enter a number between 0 and 100: ";
+        }
+        else {
+            break;
+        }
+    } while (true);
+    cout << "Enter marks for criterion 2: ";
+    do {
+        cin >> assessment1.c2_marks;
+        if (cin.fail() || assessment1.c2_marks < 0 || assessment1.c2_marks > 100) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please enter a number between 0 and 100: ";
+        }
+        else {
+            break;
+        }
+    } while (true);
+
+    cout << "\n--------------------------------\n" << endl;
+
+    //Assessment 2
+    cout << "Assessment 2" << endl;
+    cout << "Enter marks for criterion 1: ";
+    do {
+        cin >> assessment2.c1_marks;
+        if (cin.fail() || assessment2.c1_marks < 0 || assessment2.c1_marks > 100) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please enter a number between 0 and 100: ";
+        }
+        else {
+            break;
+        }
+    } while (true);
+    cout << "Enter marks for criterion 2: ";
+    do {
+        cin >> assessment2.c2_marks;
+        if (cin.fail() || assessment2.c2_marks < 0 || assessment2.c2_marks > 100) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please enter a number between 0 and 100: ";
+        }
+        else {
+            break;
+        }
+    } while (true);
+    cout << "Enter marks for criterion 3: ";
+    do {
+        cin >> assessment2.c3_marks;
+        if (cin.fail() || assessment2.c3_marks < 0 || assessment2.c3_marks > 100) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please enter a number between 0 and 100: ";
+        }
+        else {
+            break;
+        }
+    } while (true);
+
+    //Grade calculation
+    assessment1.percentage = (assessment1.c1_marks * assessment1.c1_weight / 100) + (assessment1.c2_marks * assessment1.c2_weight / 100);
+    assessment2.percentage = (assessment2.c1_marks * assessment2.c1_weight / 100) + (assessment2.c2_marks * assessment2.c2_weight / 100) + (assessment2.c3_marks * assessment2.c3_weight / 100);
     
-   cout << "Grade Calculator for Programming Fundamentals Course!" << endl;
-   cout << "\n---------------------------------------------------\n" << endl;
 
-   // Assessment 1
-   // Challenges
-   cout << "Assessment #1 Challenges" << endl;
-   for (int i = 0; i < 10; i++)
-   {
-	   cout << "Enter your marks for challenge #" << i + 1 << ": ";
-	   cin >> assm1.challenges[i];
-       if (assm1.challenges[i] < 0 || assm1.challenges[i] > assm1.challenges_weighting[i])
-       {
-		   cout << "Invalid input, please enter a grade between 0 and 100." << endl;
-		   i--;
-	   }
+    cout << "\n--------------------------------\n" << endl;
 
-       // Adding the grade for an overall
-       assm1.challenges_overall_grade += assm1.challenges[i];
-   }
-   cout << endl;
+    //Output
+    cout << "Assessment 1 percentage: " << assessment1.percentage << "%" << endl;
+    cout << "Assessment 2 percentage: " << assessment2.percentage << "%" << endl;
+    cout << "Overall percentage: " << (assessment1.percentage + assessment2.percentage) / 2 << "%" << endl;
 
-   // Documentation
-   cout << "Enter your marks for documentation: ";
-   cin >> assm1.documentation;
-
-   // Calculation for Assessment 1
+    // For each component
 
 }
-
-//Add code to build a grade calculator for the module. This should:
-    //
-    // - Prompt the user for input, for the grade of each component of assessment 1
-    // - Prompt the user for input, for the grade of each component of assessment 2
-    // - Provide a detailed breakdown of:
-    //      - List the overall percentage of each assessment
-    //      - Their overall grade after percentage weighting
-    //      - Output which CRG band they fit into, for each criterion
-
-    //Invalid input should be detected and handled after prompting. For example,
-    //if the input grade "-1" is given, the user should be reprompted to enter the
-    //grade again.
-
-    //Furthermore, please use structs and arrays where appropriate to model
-    //the different assessment components.
-    //
