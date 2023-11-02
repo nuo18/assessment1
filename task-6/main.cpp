@@ -39,59 +39,40 @@ void main()
     int userGuesses = 0;
 
     cout << "Welcome to the random number guessing game!" << endl;
-    cout << "Enter a guess: ";
-    cin >> guess;
 
-    userGuesses++;
-
-    while (guess != answer)
+    while (true)
     {
-        if (guess > 99 || guess < 1)
-        {
-            cout << "Please enter a number between 0 - 100." << endl;
+        int guess;
+        cout << "Enter a guess: ";
+        cin >> guess;
+        userGuesses++;
+
+        if (guess < 0 || guess > 100) {
+            cout << "Please enter a number between 0 and 100." << endl;
         }
-        else if (answer + 2 >= guess && guess >= answer - 2)
-        {
-            cout << "Boiling!" << endl;
-        }
-        else if (answer + 5 >= guess && guess >= answer - 5)
-        {
-            cout << "Hot!" << endl;
-        }
-        else if (answer + 10 >= guess && guess >= answer - 10)
-        {
-            cout << "Warmer!" << endl;
-        }
-        else if (answer + 15 >= guess && guess >= answer - 15)
-        {
-            cout << "Warm!" << endl;
-        }
-        else if (answer + 25 >= guess && guess >= answer - 25)
-        {
-            cout << "Cold!" << endl;
-        }
-        else if (answer + 35 >= guess && guess >= answer - 35)
-        {
-            cout << "Colder!" << endl;
-        }
-        else if (answer + 50 >= guess && guess >= answer - 50)
-        {
-            cout << "Freezing!" << endl;
-        }
-        else if (answer + 100 >= guess && guess >= answer - 100)
-        {
-            // For extreme cases where the random number is very low/high and the guess is very high/low
-            cout << "Freezing!" << endl;
-        }
-        else
-        {
+        else if (guess == answer) {
+            cout << "Congratulations! You guessed the number in " << userGuesses << " guesses!" << endl;
             break;
         }
-
-		cout << "Enter a guess: ";
-		cin >> guess;
-        userGuesses++;
-	}
+        else {
+            int difference = abs(answer - guess);
+			if (difference <= 2) {
+				cout << "Boiling!" << endl;
+			} else if (difference <= 5) {
+				cout << "Hot!" << endl;
+			} else if (difference <= 10) {
+				cout << "Warmer!" << endl;
+			} else if (difference <= 15) {
+				cout << "Warm!" << endl;
+			} else if (difference <= 25) {
+				cout << "Cold!" << endl;
+			} else if (difference <= 35) {
+				cout << "Colder!" << endl;
+			} else {
+				cout << "Freezing!" << endl;
+			}
+		}
+    }
 
     cout << "You guessed the number in " << userGuesses << " guesses!" << endl;
     cout << "Thanks for playing!" << endl;
