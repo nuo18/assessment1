@@ -9,150 +9,102 @@ struct Item
 };
 
 // Function prototypes
-void viewItem(Item* inventory, int index);
-void setItem(Item* inventory, int index, int itemId);
+void viewItem(Item* inventory, int index, int inventorySize);
+void setItem(Item* inventory, int index, int itemId, int inventorySize);
 void showInventory(Item* inventory, int inventorySize);
 void possibleItems();
 void exitTool();
 
-void main()
-{
-    // Declaring the variables
+void main() {
     int inventorySize = 0;
     string command = "";
-    
-    // Asking the user to enter the size of the inventory within the range of 1 to 16
+
+    // Getting the inventory size
     do {
-        cout << "Please enter an inventory size (1-16): ";
+        cout << "Please enter a valid inventory size (1-16): ";
         cin >> inventorySize;
-    } 
-    while (inventorySize < 1 || inventorySize > 16);
+    } while (inventorySize < 1 || inventorySize > 16);
     cout << "> Initialized inventory with " << inventorySize << " slots.\n" << endl;
 
-    // Creating a dynamic array of structs
+    // Creating the inventory
     Item* inventory = new Item[inventorySize];
-    
-    // Initializing the inventory with empty slots
-    for (int i = 0; i < inventorySize; i++)
-    {
-		inventory[i] = { "Empty", 0 };
-	}
 
-    // The main game loop
-    while (command != "exit")
-    {
-        // Asking the user to enter a command
-		// cout << "Please enter a command: ";
-        // Waiting for user input
-        cout << "> ";
-		cin >> command;
-
-		// Checking the command
-        // view <number>
-        if (command == "view")
-        {
-			// Declaring the variables
-			int index = 0;
-
-            // No need to ask the user to enter the index of the item as it is already entered in the command with a space
-			cin >> index;
-            cout << endl;
-
-			// Checking if the index is within the range
-            if (index >= 0 && index < inventorySize)
-            {
-				// Calling the viewItem function
-				viewItem(inventory, index);
-			}
-            else
-            {
-				// Printing an error message
-				cout << "Invalid index!" << endl;
-                cout << endl;
-			}
-		}
-        // set <index> <item_id>
-        else if (command == "set")
-        {
-			// Declaring the variables
-			int index = 0;
-			int itemId = 0;
-
-			cin >> index;
-			cin >> itemId;
-
-			// Checking if the index is within the range
-            if (index >= 0 && index < inventorySize)
-            {
-				// Calling the setItem function
-				setItem(inventory, index, itemId);
-			}
-            else
-            {
-				// Printing an error message
-				cout << "Invalid index!" << endl;
-			}
-		}
-        // show_all
-        else if (command == "show_all")
-        {
-			// Calling the showInventory function
-            cout << endl;
-			showInventory(inventory, inventorySize);
-		}
-        // items
-        else if (command == "items")
-        {
-			// Calling the possibleItems function
-            cout << endl;
-			possibleItems();
-		}
-        // exit
-        else if (command == "exit")
-		{ }
-        // Invalid command
-        else
-        {
-			// Printing an error message
-            cout << endl;
-			cout << "Invalid command!" << endl;
-            cout << endl;
-		}
+    // Initializing the inventory
+    for (int i = 0; i < inventorySize; i++) {
+        inventory[i] = { "Empty", 0 };
     }
+
+    // Main game loop
+    while (command != "exit") {
+        cout << "> ";
+        cin >> command;
+
+        // Checking the command
+        try {
+            if (command == "view") {
+                int index = 0;
+                cin >> index;
+                viewItem(inventory, index, inventorySize);
+            }
+            else if (command == "set") {
+                int index = 0, itemId = 0;
+                cin >> index >> itemId;
+                setItem(inventory, index, itemId, inventorySize);
+            }
+            else if (command == "show_all") {
+                showInventory(inventory, inventorySize);
+            }
+            else if (command == "items") {
+                possibleItems();
+            }
+            else if (command != "exit") {
+                throw invalid_argument("Invalid command!");
+            }
+        }
+        catch (exception& e) {
+            cerr << "Error: " << e.what() << endl;
+        }
+    }
+
+    delete[] inventory; // Deallocate dynamic array memory
+    exitTool();
 }
 
 // All the functions
 // Prints the item at the specified index
-void viewItem(Item* inventory, int index)
-{
-	// Printing the item at the specified index
-	cout << "Inventory Slot " << index << " information:" << endl;
-	cout << "Name: " << inventory[index].name << endl;
-    cout << endl;
+void viewItem(Item* inventory, int index, int inventorySize) {
+    if (index >= 0 && index < inventorySize) {
+        cout << "Inventory Slot " << index << " information:" << endl;
+        cout << "Name: " << inventory[index].name << endl << endl;
+    }
+    else {
+        throw out_of_range("Invalid index!");
+    }
 }
 
 // Sets the item at the specified index
-void setItem(Item* inventory, int index, int itemId)
-{
-	// Setting the item at the specified index
-    switch (itemId)
-    {
-	case 0:
-		inventory[index] = { "Empty", 0 };
-		break;
-	case 1:
-		inventory[index] = { "Shield", 1 };
-		break;
-	case 2:
-		inventory[index] = { "Potion", 2 };
-		break;
-	case 3:
-		inventory[index] = { "Gloves", 3 };
-		break;
-	default:
-		cout << "Invalid item id!\n" << endl;
-		break;
-	}
+void setItem(Item* inventory, int index, int itemId, int inventorySize) {
+    if (index >= 0 && index < inventorySize) {
+        switch (itemId) {
+        case 0:
+            inventory[index] = { "Empty", 0 };
+            break;
+        case 1:
+            inventory[index] = { "Shield", 1 };
+            break;
+        case 2:
+            inventory[index] = { "Potion", 2 };
+            break;
+        case 3:
+            inventory[index] = { "Gloves", 3 };
+            break;
+        default:
+            throw invalid_argument("Invalid item id!");
+        }
+    }
+    else {
+        throw out_of_range("Invalid index!");
+    }
 }
 
 // Shows all the slots in the inventory
@@ -184,6 +136,7 @@ void exitTool()
 {
 	// Exiting the tool
 	cout << "Exiting the tool...\n" << endl;
+    system("exit");
 }
 
 //In this challenge, you should build an inventory system using a dynamically
