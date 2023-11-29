@@ -9,6 +9,7 @@ struct Item
 };
 
 // Function prototypes
+int userChoice();
 void viewItem(Item* inventory, int index, int inventorySize);
 void setItem(Item* inventory, int index, int itemId, int inventorySize);
 void showInventory(Item* inventory, int inventorySize);
@@ -22,7 +23,7 @@ void main() {
     // Getting the inventory size
     do {
         cout << "Please enter a valid inventory size (1-16): ";
-        cin >> inventorySize;
+        inventorySize = userChoice();
     } while (inventorySize < 1 || inventorySize > 16);
     cout << "> Initialized inventory with " << inventorySize << " slots.\n" << endl;
 
@@ -42,13 +43,12 @@ void main() {
         // Checking the command
         try {
             if (command == "view") {
-                int index = 0;
-                cin >> index;
+                int index = userChoice();
                 viewItem(inventory, index, inventorySize);
             }
             else if (command == "set") {
-                int index = 0, itemId = 0;
-                cin >> index >> itemId;
+                int index = userChoice();
+                int itemId = userChoice();
                 setItem(inventory, index, itemId, inventorySize);
             }
             else if (command == "show_all") {
@@ -58,7 +58,7 @@ void main() {
                 possibleItems();
             }
             else if (command != "exit") {
-                throw invalid_argument("Invalid command!");
+                throw invalid_argument("> Invalid command!");
             }
         }
         catch (exception& e) {
@@ -71,6 +71,17 @@ void main() {
 }
 
 // All the functions
+// Check for input errors
+int userChoice() {
+    int value;
+    while (!(cin >> value)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "> Invalid input. Please enter an integer: ";
+    }
+    return value;
+}
+
 // Prints the item at the specified index
 void viewItem(Item* inventory, int index, int inventorySize) {
     if (index >= 0 && index < inventorySize) {
@@ -103,7 +114,7 @@ void setItem(Item* inventory, int index, int itemId, int inventorySize) {
         }
     }
     else {
-        throw out_of_range("Invalid index!");
+        throw out_of_range("> Invalid index!");
     }
 }
 
